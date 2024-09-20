@@ -1,4 +1,34 @@
 #!/usr/bin/env python3
 
+
+def create_grade_report(student_grades):
+    with open('reports/grade_report.txt', 'w') as gr:
+        # loop statement 
+        for grade in student_grades:
+            #add an \n to write grades on seperate lines
+            gr.write(grade + '\n')
+
+
+
 if __name__ == '__main__':
+    student_grades = []
+    grade = input('student name, grade: ')
+    while grade:
+        student_grades.append(grade)
+        # end when no grade is entered
+        grade = input('Student name, grade: ')
+
+    create_grade_report(student_grades)
+
+    # example of a CLI FILE 
+class MyClass:
+    def __init__(self, user_input):
+        self.value = user_input
+
+def my_function(my_object):
     pass
+
+if __name__ == '__main__':
+    user_input = input ('student name , grade:')
+    my_object = MyClass(user_input)
+    print (my_function(my_object))

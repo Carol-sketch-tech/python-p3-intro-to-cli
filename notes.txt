@@ -1,0 +1,121 @@
+Objective 
+1. use your python skills to build an itneractive command-lin application.
+2. follow best practices in CLI deign in python.
+
+INRO to COMMAND LINE INTERFACE.
+
+1. Command line -is a text-based interface that is built into your computer operating system.
+it allows you to access the files and applications on your computer amnually or thorough scripts.
+2. Terminal - the application that allows you to access the command line.
+3. command- shell or powershell 
+   application in windows that allow you to acccess the command line.
+4. command line interface - is a text based interface tised to run programs, manage files and interat
+  with objacts in memory. as the name suggest it is run from the command line.
+
+lets take sometime to explore the format of the project : command line interface (CLI)
+
+CLI IS A program that is run from the command line and provides a text based inteerface to allow you to carry out various tasks.
+while functinalit of CLIs is limktes but he capabilites of the terminal and commadn shell
+
+
+BUILDING A SIMPLE CLI.
+for and clone this repostory and ipen the file grade_reports.py from the lib directory to follow along.
+
+the first thin that we need to do is scaffold our CLI so that it can be run from the command line.
+to do this we need to create a script. there are two pieces we know are going into the script regardless of the particulars 
+the shebang and the if __name__ = '__main__' block.
+     
+     # !/usr/bin/env/python3
+     if __name__ = '__main__':
+        pass
+
+remmber that the shebang tells the comamnd line that this program shoulf be executed using hte python3 interpreter.
+we can still run the scrip without the shebang but will rewuire we write the whole python filename.py to do so.
+therfore we should always have the shebang statement.
+
+in the lib direcotry runthe chomd +x grade_reports.py to make your code executable.
+
+the if __name__ = '__main__' tells the interprater that this scritp should only be run if grade_reports.py itsled is being called from the command line.
+this is important if you want to import any objects from grades_reports.py into other modules.
+if you dont include this code block, the full script will be run whenever youother modules run the import.
+that is not a helpful feature in your CLI.
+
+lets add functionality to our CLI.
+we wan to produce a grade report a ful class of students, were going to use pythons imput() and open()
+
+        def create_grade_report(student_grades):
+            with open('reports/grade_report.txt', 'w') as gr:
+            gr.write(student_grades)
+
+        if __name__='__main__':
+            student_grades = input('Student name, grade: ')
+            create_grade_report(student_grades)
+
+After run the following command 
+
+        python grade_reports.py
+ and enter the entry asked for then press enter
+
+ Open the reports directory , you should see that grade_repirt.txt hs been generated and contains your inputstill this is 
+ not really useful for genreating grades reports.
+ lets use a while look to continue collectiong students grades until there are no more to enter nad for a 
+ loop to wtire the grade line by line.
+
+ def create_grade_report(student_grades):
+    with open ('Student name, grade : ', 'w') as gr:
+    for grade in student_grades:
+        gr.write(grade + '\n')
+
+        # note that the for loop statemetn in teh code block above says that for every
+        grade in the student_grades we should enter another grade or entry in the next line.
+
+if __name__= '__main__':
+student_grade = []
+grade = input('Student name, grade: ')
+while grade:
+    student_grade.append(grade)
+    grade = input('Student name, grade: ')
+
+note that the mode that we will need to set open() to if we want to update grade_report.txt
+rather than overwrite it will be 'a' for append.
+
+
+BEST PRACTICES IN CLI DESIGN
+Here are a few things that we need to keep a few things in ind as you work on the phase 3 project:
+
+    1. SEPARATE USER INPUT functionality
+        CLI depends on user input and a lot of code to act on it, but that doesnt mean it all has to be int he same place.
+        as with other python program your cli should be grouped onto clasees ad fucntions.
+
+        Your scripted code that os the code inseide of your if __ name__ = '__main__' blcokshould only include user inout and calls to class
+        functions.
+        take for instaance the code in the grade_reports.py file,
+         here we have fctored most of our code into a class MyClass and a fucntion my_function() and outputs the final value of hte work flow.
+         you may find in necessary at times to inlcude for loops, whie loops and if/elif/else statements in this portion of hte CLI but make sure to 
+         seperate and organize your code in to clsses and functions wherenever possible.
+
+         to make this even easiser you can seperate realted fucntions and classes into different files and import then into your CLI script.
+
+
+VALIDATE USER INPUT.
+
+You may ahve notices that in out grades_reports CLI that we did no validare user input .
+if you eanted to enter a number of nonsensical string, nt only could you have donde so, bit it would have been written to grade_report.txt
+
+ A good CLI will check the ormat of user input before usint it perform any actions.
+ this can be acrried out using regular expressions through the re module the buil-in type() and isinstance() functions the various pythn operations and more.
+ the isinstance() method take two arguments, and will check if an object is an instance of a specific class.
+
+
+ KEEP THE END USER INFORMED.
+ YOU MAY HAVE NOTICEd using pipenv that many things are printef to the command linewhile external 
+ libraries are added to your virtual enviropnment.
+  this lets you know that pipenv is doing its job.
+
+  a CLI ahould always inform the ned user of that it is doing and where to find output.
+  this should alwys happen through the aCLI itself, but its often helpul to store the messages from a session in a logs directory as well.
+
+
+  USE EXTERNAL CODE TO STANDARDIZE YOUR CODE.
+  two amaizing external library for CLI ARE click and fire
+  
